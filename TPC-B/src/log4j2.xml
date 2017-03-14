@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property name="PATTERN">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console">
+			<PatternLayout pattern="${PATTERN}" />
+		</Console>
+		<!-- RollingFile name="RollingFile" immediateFlush="true"
+			fileName="log/app.log" filePattern="log/app.%d{yyyy-MM-dd-hh-mm}.log">
+			<PatternLayout pattern="${PATTERN}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="20 MB" />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile-->
+	</Appenders>
+	<Loggers>
+		<Logger name="org.mongodb.driver" level="WARN">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="tpc.b.mongodb" additivity="true">
+			<AppenderRef ref="Console" level="info"/>
+			<!-- AppenderRef ref="RollingFile" level="debug"></AppenderRef-->
+		</Logger>
+		<Root level="debug" additivity="true">
+			<!-- AppenderRef ref="Console" / -->
+		</Root>
+	</Loggers>
+</Configuration>
